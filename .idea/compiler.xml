@@ -21,6 +21,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="13">
       <module name="ambupi" target="1.8" />
+      <module name="piwork" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
