@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: /Users/VicMini/git/HW/target
+Main-Class: Main
+
