@@ -1,26 +1,55 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Main
+/***************************************************************************************
+ *      Ambu stepper motor controller                                                  *
+ *      copyright 2020 Vic Wintriss                                                    *
+ /***************************************************************************************/
+public class Main implements ActionListener
 {
-    /***************************************************************************************
-     *      Ambu stepper motor controller
-     *      copyright 2019 Vic Wintriss                                                    */
-    private final String version = "    version 900.08";
-    private final String date = " May 25, 2020 ";
-    private final String description = " => Ambu stepper motor controller <= \n";
-    /**************************************************************************************/
+    private final String version = " version 901.00 ";
+    private final String date = " July 12, 2020 ";
+    private final String description = " * Ambu stepper motor controller * ";
     private final TestSequences ts = new TestSequences();
     private final UserExperience ux = new UserExperience();
+    private final Timer paintTicker = new Timer(100, ux);
+    private final Timer runTicker = new Timer(100, this);
+    private String direction = "BLANK";
 
-    private Main()
+    public static void main(String[] args)
     {
-        System.out.println(description + version + date);
-        ts.setUx(ux);
-        ux.setTs(ts);
-        new Timer(100, ux).start();
-        ux.createGUI(version);
+        new Main().getGoing();
     }
 
-    public static void main(String[] args) { SwingUtilities.invokeLater(Main::new); }
+    private void getGoing()
+    {
+        System.out.println(description + version + date);
+        ux.createGUI(description, version, date);
+        //paintTicker.start();
+        //runTicker.start();
+        ts.blink("FORWARD");
+        while (true)
+        {
+            ts.readLidar();
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) //runTicker event
+    {
+        this.direction = ux.getDirection();
+        if (direction.equals("FORWARD"))
+        {
+            ts.blink("FORWARD");
+            System.out.println("fwd in run Ticker");
+        }
+        if (direction.equals("BACKWARD"))
+        {
+            ts.blink("BACKWORD");
+            System.out.println("fwd in run Ticker");
+        }
+        ux.setDirection("BLANK");
+    }
 }
 

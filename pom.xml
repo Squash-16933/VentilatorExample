@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wintrisstech</groupId>
     <artifactId>ambupi</artifactId>
-    <version>900.08</version>
+    <version>900.42</version>
     <packaging>jar</packaging>
     <build>
         <plugins>
